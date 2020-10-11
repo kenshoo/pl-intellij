@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>com.kenshoo.pl-intellij-plugin</id>
+    <name>Kenshoo Persistence Layer</name>
+    <vendor email="dont_use_this@no_email.com" url="https://github.com/kenshoo">Kenshoo</vendor>
+
+    <description><![CDATA[
+    Creation wizard for Persistence-Layer entities.
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!--
+        <action id="com.kenshoo.pl.intellij.PlEntityWizardAction" class="com.kenshoo.pl.intellij.PlEntityWizardAction"
+                text="New PL Entity" description="New Persistence Layer entity wizard">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        -->
+    </actions>
+</idea-plugin>
