@@ -13,7 +13,8 @@ import static java.util.Arrays.asList;
 public class GalForm {
     public JPanel mainPanel;
     public JTable table1;
-    private JTextField entityNameTextField;
+    private JTextField entityName;
+    private JTextField tableName;
 
 
     public GalForm() {
