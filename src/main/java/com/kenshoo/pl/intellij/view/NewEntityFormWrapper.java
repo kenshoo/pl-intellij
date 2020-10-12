@@ -1,4 +1,4 @@
-package com.kenshoo.pl.intellij.controller;
+package com.kenshoo.pl.intellij.view;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.kenshoo.pl.intellij.model.EntityInput;
