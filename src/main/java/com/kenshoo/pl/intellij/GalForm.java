@@ -1,7 +1,8 @@
 package com.kenshoo.pl.intellij;
 
+import com.kenshoo.pl.intellij.entities.FieldFlags;
+import com.kenshoo.pl.intellij.entities.FieldType;
 import org.jetbrains.annotations.NotNull;
-import org.jooq.DataType;
 import org.jooq.impl.SQLDataType;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import static java.util.Arrays.asList;
 
 public class GalForm {
     public JPanel mainPanel;
-    public JTable table1;
+    public JTable fields;
     private JTextField entityName;
     private JTextField tableName;
 
@@ -22,19 +23,17 @@ public class GalForm {
     }
 
     private void setupTable() {
-
         final int rowCount = 100;
 
-        table1.setModel(new DefaultTableModel(new Vector<>(asList(
+        fields.setModel(new DefaultTableModel(new Vector<>(asList(
                 "Name",
                 "Type",
                 "Type length",
                 "Flags"
 
         )), rowCount));
-
-        table1.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(supportedSqlTypes()));
-        table1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(supportedFieldFlags()));
+        fields.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(supportedSqlTypes()));
+        fields.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(supportedFieldFlags()));
     }
 
     @NotNull
@@ -57,36 +56,15 @@ public class GalForm {
         return fieldTypes;
     }
 
-    public static class FieldFlags {
-        public FieldFlags(String displayName, boolean pk, boolean autoInc) {
-            this.displayName = displayName;
-            this.autoInc = autoInc;
-            this.pk = pk;
-        }
-
-        private final String displayName;
-        private final boolean autoInc;
-        private final boolean pk;
-
-        @Override
-        public String toString() {
-            return displayName;
-        }
-
+    public JTable getFields() {
+        return fields;
     }
 
-    public static class FieldType {
-        private final String sqlType;
-        private final Class javaType;
+    public JTextField getEntityName() {
+        return entityName;
+    }
 
-        public FieldType(DataType type) {
-            this.sqlType = type.getTypeName();
-            this.javaType = type.getType();
-        }
-
-        @Override
-        public String toString() {
-            return sqlType;
-        }
+    public JTextField getTableName() {
+        return tableName;
     }
 }
