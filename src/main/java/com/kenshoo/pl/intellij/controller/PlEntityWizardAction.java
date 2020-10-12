@@ -1,7 +1,10 @@
-package com.kenshoo.pl.intellij;
+package com.kenshoo.pl.intellij.controller;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.psi.PsiFile;
+import com.kenshoo.pl.intellij.view.NewEntityFormWrapper;
 import org.jetbrains.annotations.NotNull;
 
 public class PlEntityWizardAction extends AnAction {
@@ -13,8 +16,7 @@ public class PlEntityWizardAction extends AnAction {
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    new GalFormWrapper().show();
-    // Using the event, implement an action. For example, create and show a dialog.
+    new NewEntityFormWrapper().show();
   }
 
 }
