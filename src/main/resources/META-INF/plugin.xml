@@ -18,7 +18,7 @@
     </extensions>
 
     <actions>
-        <action id="com.kenshoo.pl.intellij.PlEntityWizardAction" class="com.kenshoo.pl.intellij.PlEntityWizardAction"
+        <action id="com.kenshoo.pl.intellij.controller.PlEntityWizardAction" class="com.kenshoo.pl.intellij.controller.PlEntityWizardAction"
                 text="PL Entity" description="New Persistence Layer entity wizard">
             <add-to-group group-id="NewJavaSpecialFile" anchor="first"/>
         </action>

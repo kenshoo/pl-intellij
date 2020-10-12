@@ -1,9 +1,5 @@
-package com.kenshoo.pl.intellij.builders;
+package com.kenshoo.pl.intellij.model;
 
-import com.kenshoo.pl.intellij.entities.EntityInput;
-import com.kenshoo.pl.intellij.entities.EntitySchemaField;
-import com.kenshoo.pl.intellij.entities.FieldFlags;
-import com.kenshoo.pl.intellij.entities.FieldType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

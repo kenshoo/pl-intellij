@@ -1,6 +1,4 @@
-package com.kenshoo.pl.intellij.entities;
-
-import com.kenshoo.pl.intellij.GalForm;
+package com.kenshoo.pl.intellij.model;
 
 public class EntitySchemaField {
     private final String fieldName;

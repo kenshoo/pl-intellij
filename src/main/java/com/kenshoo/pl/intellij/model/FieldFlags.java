@@ -1,6 +1,4 @@
-package com.kenshoo.pl.intellij.entities;
-
-import org.jooq.DataType;
+package com.kenshoo.pl.intellij.model;
 
 public class FieldFlags {
 

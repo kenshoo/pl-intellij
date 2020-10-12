@@ -1,7 +1,7 @@
-package com.kenshoo.pl.intellij;
+package com.kenshoo.pl.intellij.view;
 
-import com.kenshoo.pl.intellij.entities.FieldFlags;
-import com.kenshoo.pl.intellij.entities.FieldType;
+import com.kenshoo.pl.intellij.model.FieldFlags;
+import com.kenshoo.pl.intellij.model.FieldType;
 import org.jetbrains.annotations.NotNull;
 import org.jooq.impl.SQLDataType;
 
@@ -11,14 +11,14 @@ import java.util.Vector;
 
 import static java.util.Arrays.asList;
 
-public class GalForm {
+public class NewEntityForm {
     public JPanel mainPanel;
     public JTable fields;
     private JTextField entityName;
     private JTextField tableName;
 
 
-    public GalForm() {
+    public NewEntityForm() {
         setupTable();
     }
 

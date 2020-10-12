@@ -1,4 +1,4 @@
-package com.kenshoo.pl.intellij.entities;
+package com.kenshoo.pl.intellij.model;
 
 import org.jooq.DataType;
 

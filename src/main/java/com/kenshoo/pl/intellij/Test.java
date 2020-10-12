@@ -1,5 +1,7 @@
 package com.kenshoo.pl.intellij;
 
+import com.kenshoo.pl.intellij.view.NewEntityForm;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,7 @@ public class Test {
         final Dimension SIZE = new Dimension(600, 400);
 
 
-        GalForm mainForm = new GalForm();
+        NewEntityForm mainForm = new NewEntityForm();
         mainForm.mainPanel.setSize(SIZE);
 
 
