@@ -1,9 +1,10 @@
 package com.kenshoo.pl.intellij.view;
 
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.psi.impl.file.PsiJavaDirectoryImpl;
+import com.kenshoo.pl.intellij.controller.NewEntityController;
 import com.kenshoo.pl.intellij.model.EntityInput;
 import com.kenshoo.pl.intellij.model.EntityInputBuilder;
-import com.kenshoo.pl.intellij.view.NewEntityForm;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -11,10 +12,12 @@ import java.awt.event.ActionEvent;
 
 public class NewEntityFormWrapper extends DialogWrapper {
 
+    private final PsiJavaDirectoryImpl directory;
     private final NewEntityForm form;
 
-    public NewEntityFormWrapper() {
+    public NewEntityFormWrapper(@Nullable PsiJavaDirectoryImpl directory) {
         super(true);
+        this.directory = directory;
         this.form = new NewEntityForm();
         this.myOKAction = new OkWrapper();
         init();
@@ -37,6 +40,8 @@ public class NewEntityFormWrapper extends DialogWrapper {
                     .withTableName(form.getTableName())
                     .withFields(form.getFields())
                     .build();
+
+            NewEntityController.INSTANCE.createNewEntity(directory, entityInput);
 
             super.actionPerformed(event);
         }
