@@ -2,7 +2,7 @@ package com.kenshoo.pl.intellij.view;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.psi.impl.file.PsiJavaDirectoryImpl;
-import com.kenshoo.pl.intellij.controller.EntityController;
+import com.kenshoo.pl.intellij.controller.NewEntityController;
 import com.kenshoo.pl.intellij.model.EntityInput;
 import com.kenshoo.pl.intellij.model.EntityInputBuilder;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +41,7 @@ public class NewEntityFormWrapper extends DialogWrapper {
                     .withFields(form.getFields())
                     .build();
 
-            EntityController.INSTANCE.generateEntity(directory, entityInput);
+            NewEntityController.INSTANCE.createNewEntity(directory, entityInput);
 
             super.actionPerformed(event);
         }
