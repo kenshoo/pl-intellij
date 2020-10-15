@@ -12,6 +12,18 @@ public class FieldFlags {
         this.pk = pk;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public boolean isAutoInc() {
+        return autoInc;
+    }
+
+    public boolean isPk() {
+        return pk;
+    }
+
     @Override
     public String toString() {
         return displayName;

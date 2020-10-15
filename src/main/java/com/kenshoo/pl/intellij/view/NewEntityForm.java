@@ -17,6 +17,10 @@ public class NewEntityForm {
     private JTextField entityName;
     private JTextField tableName;
 
+    public static final Integer FIELD_NAME_COL = 0;
+    public static final Integer FIELD_TYPE_COL = 1;
+    public static final Integer FIELD_FLAGS_COL = 2;
+
 
     public NewEntityForm() {
         setupTable();
@@ -28,12 +32,11 @@ public class NewEntityForm {
         fields.setModel(new DefaultTableModel(new Vector<>(asList(
                 "Name",
                 "Type",
-                "Type length",
                 "Flags"
 
         )), rowCount));
-        fields.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(supportedSqlTypes()));
-        fields.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(supportedFieldFlags()));
+        fields.getColumnModel().getColumn(FIELD_TYPE_COL).setCellEditor(new DefaultCellEditor(supportedSqlTypes()));
+        fields.getColumnModel().getColumn(FIELD_FLAGS_COL).setCellEditor(new DefaultCellEditor(supportedFieldFlags()));
     }
 
     @NotNull
@@ -44,6 +47,7 @@ public class NewEntityForm {
         fieldTypes.addItem(new FieldType(SQLDataType.BOOLEAN));
         fieldTypes.addItem(new FieldType(SQLDataType.FLOAT));
         fieldTypes.addItem(new FieldType(SQLDataType.BIGINT));
+        fieldTypes.addItem(new FieldType(SQLDataType.TIMESTAMP));
         return fieldTypes;
     }
 

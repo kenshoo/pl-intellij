@@ -11,6 +11,14 @@ public class FieldType {
         this.javaType = type.getType();
     }
 
+    public String getSqlType() {
+        return sqlType;
+    }
+
+    public Class getJavaType() {
+        return javaType;
+    }
+
     @Override
     public String toString() {
         return sqlType;
