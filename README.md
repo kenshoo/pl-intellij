@@ -2,6 +2,26 @@
 
 This project adds a wizard to ease creations of new PL entities.
 
+* Right click on the package where you want to create the PL entity. On the menu, choose `New` -> `PL Entity`. 
+
+![image](https://user-images.githubusercontent.com/10692534/96195312-1a21ed80-0f55-11eb-84c0-9961b930cf15.png)
+
+* In the dialog, fill the entity name (for Java classes) and SQL table name. Then, fill the sql fields. 
+
+![image](https://user-images.githubusercontent.com/10692534/96195479-8a307380-0f55-11eb-8180-0a8e6d7e1bcd.png)
+
+* This will generate all the required classes (Jooq table, flowConfig, etc...) so you can immediately start working with PL commands.
+
+# Manual installation
+
+In case the latest plugin is not yet available in the marketplace within Intellij, you can manually download it [here](https://plugins.jetbrains.com/plugin/15212-kenshoo-persistence-layer/versions).
+
+
+# Limitations (or "coming soon", ha ha....)
+* No relations supported yet.
+* Cannot use existing JOOQ tables existing in the current project.
+* Cannot edit existing entities.
+
 # How to setup dev machine
 
 * Add this to `~/.gradle/init.gradle` file:
