@@ -20,7 +20,7 @@ public class NewEntityFormWrapper extends DialogWrapper {
         this.form = new NewEntityForm();
         this.myOKAction = new OkWrapper();
         init();
-        setTitle("Test DialogWrapper");
+        setTitle("New PL Entity");
     }
 
     @Nullable
