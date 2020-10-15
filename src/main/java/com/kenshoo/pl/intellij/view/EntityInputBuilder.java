@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 import static com.kenshoo.pl.intellij.view.NewEntityForm.*;
+
 
 public class EntityInputBuilder {
     private String entityName;
@@ -21,12 +21,12 @@ public class EntityInputBuilder {
 
 
     public EntityInputBuilder withEntityName(JTextField entityName) {
-        this.entityName = entityName.getText();
+        this.entityName = toStringOrEmpty(entityName.getText()).orElse("");
         return this;
     }
 
     public EntityInputBuilder withTableName(JTextField tableName) {
-        this.tableName = tableName.getText();
+        this.tableName = toStringOrEmpty(tableName.getText()).orElse("");
         return this;
     }
 
@@ -45,13 +45,20 @@ public class EntityInputBuilder {
 
     @NotNull
     private Optional<EntitySchemaField> createEntitySchemaField(JTable fields, int rowIndex) {
-        return Optional.ofNullable(fields.getValueAt(rowIndex, FIELD_NAME_COL))
-                .map(nameCell -> {
-                    final String fieldName = nameCell.toString();
-                    final FieldType type = (FieldType) fields.getValueAt(rowIndex, FIELD_TYPE_COL);
-                    final FieldFlags flags = (FieldFlags) fields.getValueAt(rowIndex, FIELD_FLAGS_COL);
-                    return Optional.of(new EntitySchemaField(fieldName, type, flags));
-                })
-                .orElseGet(Optional::empty);
+        return toStringOrEmpty(fields.getValueAt(rowIndex, FIELD_NAME_COL))
+            .map(fieldName -> {
+                final FieldType type = (FieldType) fields.getValueAt(rowIndex, FIELD_TYPE_COL);
+                final FieldFlags flags = (FieldFlags) fields.getValueAt(rowIndex, FIELD_FLAGS_COL);
+                return Optional.of(new EntitySchemaField(fieldName, type, flags));
+            })
+            .orElseGet(Optional::empty);
     }
+
+    Optional<String> toStringOrEmpty(Object value) {
+        return Optional.ofNullable(value)
+                .map(obj -> obj.toString().trim())
+                .flatMap(str -> str.isEmpty() ? Optional.empty() : Optional.of(str));
+
+    }
+
 }
