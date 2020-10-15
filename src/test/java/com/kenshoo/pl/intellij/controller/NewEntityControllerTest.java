@@ -2,6 +2,7 @@ package com.kenshoo.pl.intellij.controller;
 
 import com.kenshoo.pl.intellij.codegen.ClassCreator;
 import com.kenshoo.pl.intellij.codegen.EntityCodeGenerator;
+import com.kenshoo.pl.intellij.codegen.EntityUniqueKeyCodeGenerator;
 import com.kenshoo.pl.intellij.codegen.TableCodeGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,9 +22,12 @@ public class NewEntityControllerTest {
     private EntityCodeGenerator entityCodeGenerator;
 
     @Mock
+    private EntityUniqueKeyCodeGenerator uniqueKeyCodeGenerator;
+
+    @Mock
     private ClassCreator classCreator;
 
-    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator, entityCodeGenerator);
+    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator, entityCodeGenerator, uniqueKeyCodeGenerator);
 
     @Test
     public void createTableClassName_convert_tableName_to_className_as_expected() {

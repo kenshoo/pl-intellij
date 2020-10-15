@@ -48,7 +48,7 @@ public class EntityInputBuilder {
         return toStringOrEmpty(fields.getValueAt(rowIndex, FIELD_NAME_COL))
             .map(fieldName -> {
                 final FieldType type = (FieldType) fields.getValueAt(rowIndex, FIELD_TYPE_COL);
-                final FieldFlags flags = (FieldFlags) fields.getValueAt(rowIndex, FIELD_FLAGS_COL);
+                final FieldFlags flags = Optional.ofNullable((FieldFlags) fields.getValueAt(rowIndex, FIELD_FLAGS_COL)).orElse(FieldFlags.empty());
                 return Optional.of(new EntitySchemaField(fieldName, type, flags));
             })
             .orElseGet(Optional::empty);
