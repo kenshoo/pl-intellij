@@ -26,7 +26,7 @@ public class ClassCreator {
 
     private FileTemplate getOrCreateTemplate(Project project) {
             final FileTemplateManager templateManager = FileTemplateManager.getInstance(project);
-            return Optional.of(templateManager.getTemplate(TEMPLATE_NAME))
+            return Optional.ofNullable(templateManager.getTemplate(TEMPLATE_NAME))
                     .orElseGet(()-> createTemplate(templateManager));
     }
 

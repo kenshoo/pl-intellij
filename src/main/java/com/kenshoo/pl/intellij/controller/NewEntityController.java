@@ -30,7 +30,7 @@ public class NewEntityController {
     public void createNewEntity(PsiJavaDirectoryImpl directory, EntityInput entityInput) {
         final String tableClassName = createTableClassName(entityInput.getTableName());
 
-        final String tableCode = tableCodeGenerator.generate(tableClassName, entityInput, directory);
+        final String tableCode = tableCodeGenerator.generate(tableClassName, entityInput);
 
         classCreator.generateClass(directory, tableClassName, tableCode);
     }

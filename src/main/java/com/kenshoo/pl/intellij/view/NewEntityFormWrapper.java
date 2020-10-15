@@ -4,7 +4,6 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.psi.impl.file.PsiJavaDirectoryImpl;
 import com.kenshoo.pl.intellij.controller.NewEntityController;
 import com.kenshoo.pl.intellij.model.EntityInput;
-import com.kenshoo.pl.intellij.model.EntityInputBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
