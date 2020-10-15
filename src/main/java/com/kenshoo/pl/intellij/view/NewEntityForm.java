@@ -3,10 +3,10 @@ package com.kenshoo.pl.intellij.view;
 import com.kenshoo.pl.intellij.model.FieldFlags;
 import com.kenshoo.pl.intellij.model.FieldType;
 import org.jetbrains.annotations.NotNull;
-import org.jooq.impl.SQLDataType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Timestamp;
 import java.util.Vector;
 
 import static java.util.Arrays.asList;
@@ -42,12 +42,12 @@ public class NewEntityForm {
     @NotNull
     private JComboBox<FieldType> supportedSqlTypes() {
         JComboBox<FieldType> fieldTypes = new JComboBox<>();
-        fieldTypes.addItem(new FieldType(SQLDataType.INTEGER));
-        fieldTypes.addItem(new FieldType(SQLDataType.VARCHAR(0)));
-        fieldTypes.addItem(new FieldType(SQLDataType.BOOLEAN));
-        fieldTypes.addItem(new FieldType(SQLDataType.FLOAT));
-        fieldTypes.addItem(new FieldType(SQLDataType.BIGINT));
-        fieldTypes.addItem(new FieldType(SQLDataType.TIMESTAMP));
+        fieldTypes.addItem(new FieldType("INTEGER", Integer.class));
+        fieldTypes.addItem(new FieldType("VARCHAR", String.class));
+        fieldTypes.addItem(new FieldType("BOOLEAN", boolean.class));
+        fieldTypes.addItem(new FieldType("FLOAT", Float.class));
+        fieldTypes.addItem(new FieldType("BIGINT", Long.class));
+        fieldTypes.addItem(new FieldType("TIMESTAMP", Timestamp.class));
         return fieldTypes;
     }
 
