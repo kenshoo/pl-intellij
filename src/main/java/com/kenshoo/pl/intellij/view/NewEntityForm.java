@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 public class NewEntityForm {
     public JPanel mainPanel;
-    public JTable fields;
+    private JTable fields;
     private JTextField entityName;
     private JTextField tableName;
 
