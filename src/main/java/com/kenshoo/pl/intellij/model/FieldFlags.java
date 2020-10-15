@@ -12,6 +12,10 @@ public class FieldFlags {
         this.pk = pk;
     }
 
+    public static FieldFlags empty() {
+        return new FieldFlags("", false, false);
+    }
+
     public String getDisplayName() {
         return displayName;
     }
