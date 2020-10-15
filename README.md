@@ -14,7 +14,10 @@ This project adds a wizard to ease creations of new PL entities.
 
 # Manual installation
 
-In case the latest plugin is not yet available in the marketplace within Intellij, you can manually download it [here](https://plugins.jetbrains.com/plugin/15212-kenshoo-persistence-layer/versions).
+In case the latest plugin is not yet available in the marketplace within Intellij, you can manually download it [here](https://plugins.jetbrains.com/plugin/15212-kenshoo-persistence-layer/versions). 
+Then, you can install it from the disk like this: 
+
+![image](https://user-images.githubusercontent.com/10692534/96195881-a7b20d00-0f56-11eb-9e24-5e0ebd9a36d1.png)
 
 
 # Limitations (or "coming soon", ha ha....)
