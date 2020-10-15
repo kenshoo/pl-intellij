@@ -22,10 +22,10 @@ Then, you can install it from the disk like this:
 
 # Limitations (or "coming soon", ha ha....)
 * No relations supported yet.
-* Cannot use existing JOOQ tables existing in the current project.
-* Cannot edit existing entities.
+* Cannot reuse the JOOQ tables already existing in the current project.
+* Cannot edit existing entities (only creation flow supported).
 
-# How to setup dev machine
+# Project setup (for plugin developers)
 
 * Add this to `~/.gradle/init.gradle` file:
 ```
