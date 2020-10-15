@@ -1,6 +1,7 @@
 package com.kenshoo.pl.intellij.controller;
 
 import com.kenshoo.pl.intellij.codegen.ClassCreator;
+import com.kenshoo.pl.intellij.codegen.EntityCodeGenerator;
 import com.kenshoo.pl.intellij.codegen.TableCodeGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,13 +18,22 @@ public class NewEntityControllerTest {
     private TableCodeGenerator tableCodeGenerator;
 
     @Mock
+    private EntityCodeGenerator entityCodeGenerator;
+
+    @Mock
     private ClassCreator classCreator;
 
-    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator);
+    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator, entityCodeGenerator);
 
     @Test
     public void createTableClassName_convert_tableName_to_className_as_expected() {
         final String className = underTest.createTableClassName("data_base");
         assertThat(className, is("DataBaseTable"));
+    }
+
+    @Test
+    public void createEntityClassName_convert_entityName_to_className_as_expected() {
+        final String className = underTest.createEntityClassName("abc");
+        assertThat(className, is("AbcEntity"));
     }
 }
