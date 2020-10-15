@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.kenshoo.pl-intellij-plugin</id>
     <name>Kenshoo Persistence Layer</name>
-    <vendor email="dont_use_this@no_email.com" url="https://github.com/kenshoo">Kenshoo</vendor>
+    <vendor email="dont_use_this@no_email.com" url="https://github.com/kenshoo/pl-intellij">Kenshoo</vendor>
 
     <description><![CDATA[
     Creation wizard for Persistence-Layer entities.
@@ -23,4 +23,6 @@
             <add-to-group group-id="NewJavaSpecialFile" anchor="first"/>
         </action>
     </actions>
+
+    <depends>com.intellij.modules.java</depends>
 </idea-plugin>
