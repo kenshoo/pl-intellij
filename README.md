@@ -14,7 +14,7 @@ This project adds a wizard to ease creations of new PL entities.
 
 # Manual installation
 
-In case the latest plugin is not yet available in the marketplace within Intellij, you can manually download it [here](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=99880). 
+In case the latest plugin is not yet available in the marketplace within Intellij, you can manually download it [here](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=99885). 
 Then, you can install it from the disk like this: 
 
 ![image](https://user-images.githubusercontent.com/10692534/96195881-a7b20d00-0f56-11eb-9e24-5e0ebd9a36d1.png)
