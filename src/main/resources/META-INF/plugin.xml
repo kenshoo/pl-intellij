@@ -4,14 +4,22 @@
     <vendor email="dont_use_this@no_email.com" url="https://github.com/kenshoo/pl-intellij">Kenshoo</vendor>
 
     <description><![CDATA[
-    Creation wizard for Persistence-Layer entities.
+    <b>Creation wizard for Persistence-Layer entities.</b>
+    <p>
+    <a href="https://github.com/kenshoo/persistence-layer">PL</a> is a command pattern ORM (for Java+MySQL) supporting business flow rules, which is highly optimized
+    for performance. This plugin is compatible with version 0.1.x of PL.
+    </p>
+    <p>
+    This Plugin adds a "New... PL Entity" action to pop out a wizard dialog where you can declare
+    the entity fields, and after clicking "OK", all the necessary PL code shall be generated
+    (including the JOOQ table).
+    </p>
     ]]></description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+    <change-notes><![CDATA[
+        <li> Support all IntelliJ IDEA 2020 versions</li>
+        <li> Fix "boolean" generic to "Boolean" </li>
+    ]]></change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->

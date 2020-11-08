@@ -44,7 +44,7 @@ public class NewEntityForm {
         JComboBox<FieldType> fieldTypes = new JComboBox<>();
         fieldTypes.addItem(new FieldType("INTEGER", Integer.class));
         fieldTypes.addItem(new FieldType("VARCHAR", String.class));
-        fieldTypes.addItem(new FieldType("BOOLEAN", boolean.class));
+        fieldTypes.addItem(new FieldType("BOOLEAN", Boolean.class));
         fieldTypes.addItem(new FieldType("FLOAT", Float.class));
         fieldTypes.addItem(new FieldType("BIGINT", Long.class));
         fieldTypes.addItem(new FieldType("TIMESTAMP", Timestamp.class));
