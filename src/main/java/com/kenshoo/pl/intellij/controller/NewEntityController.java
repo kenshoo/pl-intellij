@@ -17,6 +17,7 @@ public class NewEntityController {
     private final EntityCodeGenerator entityCodeGenerator;
     private final EntityUniqueKeyCodeGenerator uniqueKeyCodeGenerator;
     private final EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
+    private final CreateCommandCodeGenerator createCommandCodeGenerator;
 
     public NewEntityController() {
         this.classCreator = ClassCreator.INSTANCE;
@@ -24,6 +25,7 @@ public class NewEntityController {
         this.entityCodeGenerator = EntityCodeGenerator.INSTANCE;
         this.uniqueKeyCodeGenerator = EntityUniqueKeyCodeGenerator.INSTANCE;
         this.entityPersistenceCodeGenerator = EntityPersistenceCodeGenerator.INSTANCE;
+        this.createCommandCodeGenerator = CreateCommandCodeGenerator.INSTANCE;
     }
 
     public NewEntityController(
@@ -31,13 +33,15 @@ public class NewEntityController {
             TableCodeGenerator tableCodeGenerator,
             EntityCodeGenerator entityCodeGenerator,
             EntityUniqueKeyCodeGenerator uniqueKeyCodeGenerator,
-            EntityPersistenceCodeGenerator entityPersistenceCodeGenerator
+            EntityPersistenceCodeGenerator entityPersistenceCodeGenerator,
+            CreateCommandCodeGenerator createCommandCodeGenerator
             ) {
         this.classCreator = classCreator;
         this.tableCodeGenerator = tableCodeGenerator;
         this.entityCodeGenerator = entityCodeGenerator;
         this.uniqueKeyCodeGenerator = uniqueKeyCodeGenerator;
         this.entityPersistenceCodeGenerator = entityPersistenceCodeGenerator;
+        this.createCommandCodeGenerator = createCommandCodeGenerator;
     }
 
     public void createNewEntity(PsiJavaDirectoryImpl directory, EntityInput input) {
@@ -45,16 +49,19 @@ public class NewEntityController {
         final String entityClassName = createEntityClassName(input.getEntityName());
         final String uniqueKeyClassName = createUniqueKeyClassName(input.getEntityName(), pkField(input).getFieldName());
         final String entityPersistenceClassName = createEntityPersistenceClassName(input.getEntityName());
+        final String createCommandClassName = "Create" + input.getEntityName();
 
         final String tableCode = tableCodeGenerator.generate(tableClassName, input);
         final String entityCode = entityCodeGenerator.generate(entityClassName, tableClassName, input);
         final String uniqueKeyCode = uniqueKeyCodeGenerator.generate(entityClassName, uniqueKeyClassName, pkField(input));
         final String entityPersistenceCode = entityPersistenceCodeGenerator.generate(entityClassName, entityPersistenceClassName);
+        final String createCommandCode = createCommandCodeGenerator.generate(createCommandClassName, entityClassName);
 
         classCreator.generateClass(directory, tableClassName, tableCode);
         classCreator.generateClass(directory, entityClassName, entityCode);
         classCreator.generateClass(directory, uniqueKeyClassName, uniqueKeyCode);
         classCreator.generateClass(directory, entityPersistenceClassName, entityPersistenceCode);
+        classCreator.generateClass(directory, createCommandCode, createCommandCode);
     }
 
     @VisibleForTesting
