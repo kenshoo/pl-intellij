@@ -1,8 +1,9 @@
 package com.kenshoo.pl.intellij.codegen;
 
-public class CreateCommandCodeGenerator {
 
-    public static final CreateCommandCodeGenerator INSTANCE = new CreateCommandCodeGenerator();
+public class DeleteCommandCodeGenerator {
+
+    public static final DeleteCommandCodeGenerator INSTANCE = new DeleteCommandCodeGenerator();
 
     private static final String NEW_LINE = "\n";
 
@@ -15,15 +16,15 @@ public class CreateCommandCodeGenerator {
                 .append(NEW_LINE)
                 .append(NEW_LINE)
                 .append(NEW_LINE)
-                .append("public class ").append(commandClass).append(" extends CreateEntityCommand<").append(entityClassName).append("> {")
+                .append("public class ").append(commandClass).append(" extends DeleteEntityCommand<").append(entityClassName).append(", Identifier<").append(entityClassName).append(">> {")
                 .append(NEW_LINE)
 
                 // --- constructor -- //
 
                 .append(NEW_LINE)
-                .append("public ").append(commandClass).append("() {")
+                .append("public ").append(commandClass).append("(Identifier<").append(entityClassName).append("> id) {")
                 .append(NEW_LINE)
-                .append("super(").append(entityClassName).append(".INSTANCE);")
+                .append("super(").append(entityClassName).append(".INSTANCE, id);")
                 .append(NEW_LINE)
                 .append("}")
                 .append(NEW_LINE)
@@ -34,6 +35,5 @@ public class CreateCommandCodeGenerator {
                 .append("}")
                 .toString();
     }
-
 
 }

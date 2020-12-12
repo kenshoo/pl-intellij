@@ -17,8 +17,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        <li> Support all IntelliJ IDEA 2020 versions</li>
-        <li> Fix "boolean" generic to "Boolean" </li>
+        <li> Add more commands (update, upsert, delete) </li>
+        <li> Fix compilation to match version 0.1.58 of PL, which include the following fixes</li>
+        <li> Fix simple validator registration</li>
+        <li> Remove UniqueKey class</li>
     ]]></change-notes>
 
     <extensions defaultExtensionNs="com.intellij">

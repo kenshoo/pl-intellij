@@ -5,7 +5,6 @@ import com.google.common.base.CaseFormat;
 import com.intellij.psi.impl.file.PsiJavaDirectoryImpl;
 import com.kenshoo.pl.intellij.codegen.*;
 import com.kenshoo.pl.intellij.model.EntityInput;
-import com.kenshoo.pl.intellij.model.EntitySchemaField;
 
 
 public class NewEntityController {
@@ -15,53 +14,67 @@ public class NewEntityController {
     private final ClassCreator classCreator;
     private final TableCodeGenerator tableCodeGenerator;
     private final EntityCodeGenerator entityCodeGenerator;
-    private final EntityUniqueKeyCodeGenerator uniqueKeyCodeGenerator;
     private final EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
     private final CreateCommandCodeGenerator createCommandCodeGenerator;
+    private final UpdateCommandCodeGenerator updateCommandCodeGenerator;
+    private final UpsertCommandCodeGenerator upsertCommandCodeGenerator;
+    private final DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     public NewEntityController() {
         this.classCreator = ClassCreator.INSTANCE;
         this.tableCodeGenerator = TableCodeGenerator.INSTANCE;
         this.entityCodeGenerator = EntityCodeGenerator.INSTANCE;
-        this.uniqueKeyCodeGenerator = EntityUniqueKeyCodeGenerator.INSTANCE;
         this.entityPersistenceCodeGenerator = EntityPersistenceCodeGenerator.INSTANCE;
         this.createCommandCodeGenerator = CreateCommandCodeGenerator.INSTANCE;
+        this.updateCommandCodeGenerator = UpdateCommandCodeGenerator.INSTANCE;
+        this.upsertCommandCodeGenerator = UpsertCommandCodeGenerator.INSTANCE;
+        this.deleteCommandCodeGenerator = DeleteCommandCodeGenerator.INSTANCE;
     }
 
     public NewEntityController(
             ClassCreator classCreator,
             TableCodeGenerator tableCodeGenerator,
             EntityCodeGenerator entityCodeGenerator,
-            EntityUniqueKeyCodeGenerator uniqueKeyCodeGenerator,
             EntityPersistenceCodeGenerator entityPersistenceCodeGenerator,
-            CreateCommandCodeGenerator createCommandCodeGenerator
+            CreateCommandCodeGenerator createCommandCodeGenerator,
+            UpdateCommandCodeGenerator updateCommandCodeGenerator,
+            UpsertCommandCodeGenerator upsertCommandCodeGenerator,
+            DeleteCommandCodeGenerator deleteCommandCodeGenerator
             ) {
         this.classCreator = classCreator;
         this.tableCodeGenerator = tableCodeGenerator;
         this.entityCodeGenerator = entityCodeGenerator;
-        this.uniqueKeyCodeGenerator = uniqueKeyCodeGenerator;
         this.entityPersistenceCodeGenerator = entityPersistenceCodeGenerator;
         this.createCommandCodeGenerator = createCommandCodeGenerator;
+        this.updateCommandCodeGenerator = updateCommandCodeGenerator;
+        this.upsertCommandCodeGenerator = upsertCommandCodeGenerator;
+        this.deleteCommandCodeGenerator = deleteCommandCodeGenerator;
     }
 
     public void createNewEntity(PsiJavaDirectoryImpl directory, EntityInput input) {
         final String tableClassName = createTableClassName(input.getTableName());
         final String entityClassName = createEntityClassName(input.getEntityName());
-        final String uniqueKeyClassName = createUniqueKeyClassName(input.getEntityName(), pkField(input).getFieldName());
         final String entityPersistenceClassName = createEntityPersistenceClassName(input.getEntityName());
         final String createCommandClassName = "Create" + input.getEntityName();
+        final String updateCommandClassName = "Update" + input.getEntityName();
+        final String upsertCommandClassName = "Upsert" + input.getEntityName();
+        final String deleteCommandClassName = "Delete" + input.getEntityName();
 
         final String tableCode = tableCodeGenerator.generate(tableClassName, input);
         final String entityCode = entityCodeGenerator.generate(entityClassName, tableClassName, input);
-        final String uniqueKeyCode = uniqueKeyCodeGenerator.generate(entityClassName, uniqueKeyClassName, pkField(input));
         final String entityPersistenceCode = entityPersistenceCodeGenerator.generate(entityClassName, entityPersistenceClassName);
         final String createCommandCode = createCommandCodeGenerator.generate(createCommandClassName, entityClassName);
+        final String updateCommandCode = updateCommandCodeGenerator.generate(updateCommandClassName, entityClassName);
+        final String upsertCommandCode = upsertCommandCodeGenerator.generate(upsertCommandClassName, entityClassName);
+        final String deleteCommandCode = deleteCommandCodeGenerator.generate(deleteCommandClassName, entityClassName);
 
         classCreator.generateClass(directory, tableClassName, tableCode);
         classCreator.generateClass(directory, entityClassName, entityCode);
-        classCreator.generateClass(directory, uniqueKeyClassName, uniqueKeyCode);
         classCreator.generateClass(directory, entityPersistenceClassName, entityPersistenceCode);
-        classCreator.generateClass(directory, createCommandCode, createCommandCode);
+        classCreator.generateClass(directory, createCommandClassName, createCommandCode);
+        classCreator.generateClass(directory, updateCommandClassName, updateCommandCode);
+        classCreator.generateClass(directory, upsertCommandClassName, upsertCommandCode);
+        classCreator.generateClass(directory, deleteCommandClassName, deleteCommandCode);
     }
 
     @VisibleForTesting
@@ -77,18 +90,6 @@ public class NewEntityController {
     @VisibleForTesting
     String createEntityPersistenceClassName(String entityName) {
         return String.format("%sPersistence", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, entityName));
-    }
-
-    @VisibleForTesting
-    String createUniqueKeyClassName(String entityName, String fieldName) {
-        return String.format("%s%s",
-                CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, entityName),
-                CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, fieldName)
-        );
-    }
-
-    private EntitySchemaField pkField(EntityInput input) {
-        return input.getFields().stream().filter(f -> f.getFlags().isPk()).findFirst().get();
     }
 
 }
