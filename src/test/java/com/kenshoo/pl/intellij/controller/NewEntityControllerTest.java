@@ -19,15 +19,24 @@ public class NewEntityControllerTest {
     private EntityCodeGenerator entityCodeGenerator;
 
     @Mock
-    private EntityUniqueKeyCodeGenerator uniqueKeyCodeGenerator;
+    private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
 
     @Mock
-    private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
+    private CreateCommandCodeGenerator createCommandCodeGenerator;
+
+    @Mock
+    private UpdateCommandCodeGenerator updateCommandCodeGenerator;
+
+    @Mock
+    private UpsertCommandCodeGenerator upsertCommandCodeGenerator;
+
+    @Mock
+    private DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     @Mock
     private ClassCreator classCreator;
 
-    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator, entityCodeGenerator, uniqueKeyCodeGenerator, entityPersistenceCodeGenerator);
+    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator, entityCodeGenerator, entityPersistenceCodeGenerator, createCommandCodeGenerator, updateCommandCodeGenerator, upsertCommandCodeGenerator, deleteCommandCodeGenerator);
 
     @Test
     public void createTableClassName_convert_tableName_to_className_as_expected() {

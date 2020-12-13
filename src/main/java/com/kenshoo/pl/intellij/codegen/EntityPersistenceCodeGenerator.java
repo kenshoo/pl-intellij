@@ -16,6 +16,9 @@ public class EntityPersistenceCodeGenerator {
                 .append(NEW_LINE)
                 .append("import java.util.stream.Stream;")
                 .append(NEW_LINE)
+                .append("import com.kenshoo.pl.entity.spi.helpers.EntityChangeCompositeValidator;")
+                .append(NEW_LINE)
+                .append(NEW_LINE)
                 .append("public class ").append(entityPersistenceClassName).append(" {")
                 .append(NEW_LINE)
 
@@ -39,9 +42,18 @@ public class EntityPersistenceCodeGenerator {
                 // --- flow config builder -- //
 
                 .append(NEW_LINE)
-                .append("private ChangeFlowConfig.Builder<").append(entityClassName).append("> flowBuilder() {")
+                .append("public ChangeFlowConfig.Builder<").append(entityClassName).append("> flowBuilder() {")
                 .append(NEW_LINE)
-                .append("return ChangeFlowConfigBuilderFactory.newInstance(plContext, ").append(entityClassName).append(".INSTANCE);")
+                .append("var simpleValidators = new EntityChangeCompositeValidator<").append(entityClassName).append(">();")
+                .append(NEW_LINE)
+                .append("// register simple validators to this var.")
+                .append(NEW_LINE)
+                .append(NEW_LINE)
+                .append("return ChangeFlowConfigBuilderFactory")
+                .append(NEW_LINE)
+                .append("    .newInstance(plContext, ").append(entityClassName).append(".INSTANCE)")
+                .append(NEW_LINE)
+                .append("    .withValidator(simpleValidators);")
                 .append(NEW_LINE)
                 .append("}")
                 .append(NEW_LINE)
@@ -64,6 +76,30 @@ public class EntityPersistenceCodeGenerator {
                 .append("UpdateResult<").append(entityClassName).append(", ID> update(Collection<UpdateEntityCommand<").append(entityClassName).append(", ID>> commands) {")
                 .append(NEW_LINE)
                 .append("return pl.update(commands, flowBuilder().build());")
+                .append(NEW_LINE)
+                .append("}")
+                .append(NEW_LINE)
+
+                // --- method: upsert -- //
+
+                .append(NEW_LINE)
+                .append("public <ID extends Identifier<").append(entityClassName).append(">>")
+                .append(NEW_LINE)
+                .append("InsertOnDuplicateUpdateResult<").append(entityClassName).append(", ID> upsert(Collection<InsertOnDuplicateUpdateCommand<").append(entityClassName).append(", ID>> commands) {")
+                .append(NEW_LINE)
+                .append("return pl.upsert(commands, flowBuilder().build());")
+                .append(NEW_LINE)
+                .append("}")
+                .append(NEW_LINE)
+
+                // --- method: delete -- //
+
+                .append(NEW_LINE)
+                .append("public <ID extends Identifier<").append(entityClassName).append(">>")
+                .append(NEW_LINE)
+                .append("DeleteResult<").append(entityClassName).append(", ID> delete(Collection<DeleteEntityCommand<").append(entityClassName).append(", ID>> commands) {")
+                .append(NEW_LINE)
+                .append("return pl.delete(commands, flowBuilder().build());")
                 .append(NEW_LINE)
                 .append("}")
                 .append(NEW_LINE)
