@@ -17,10 +17,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        <li> Add more commands (update, upsert, delete) </li>
-        <li> Fix compilation to match version 0.1.58 of PL, which include the following fixes</li>
-        <li> Fix simple validator registration</li>
-        <li> Remove UniqueKey class</li>
+        Nothing changed except for the untilBuild to support the latest IntelliJ version.
     ]]></change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
