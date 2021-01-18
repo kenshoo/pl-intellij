@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.kenshoo'
-version '0.5'
+version '0.6'
 
 sourceCompatibility = 1.8
 
@@ -29,6 +29,6 @@ patchPluginXml {
 
     patchPluginXml {
         sinceBuild '191'
-        untilBuild '203'
+        untilBuild '253'
     }
 }
