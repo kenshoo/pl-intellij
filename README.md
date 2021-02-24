@@ -1,3 +1,4 @@
+12
 # IntelliJ Plugin for Persistence Layer
 
 This project adds a wizard to ease creations of new PL entities.
