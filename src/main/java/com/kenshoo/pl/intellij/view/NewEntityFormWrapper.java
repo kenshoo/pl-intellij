@@ -1,7 +1,7 @@
 package com.kenshoo.pl.intellij.view;
 
 import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.psi.impl.file.PsiJavaDirectoryImpl;
+import com.intellij.psi.PsiDirectory;
 import com.kenshoo.pl.intellij.controller.NewEntityController;
 import com.kenshoo.pl.intellij.model.EntityInput;
 import com.kenshoo.pl.intellij.model.PLInputValidator;
@@ -19,11 +19,11 @@ public class NewEntityFormWrapper extends DialogWrapper {
 
     private final PLInputValidator validator = PLInputValidator.INSTANCE;
 
-    private final PsiJavaDirectoryImpl directory;
+    private final PsiDirectory directory;
     private final NewEntityForm form;
     private final NewEntityController controller;
 
-    public NewEntityFormWrapper(@Nullable PsiJavaDirectoryImpl directory) {
+    public NewEntityFormWrapper(@Nullable PsiDirectory directory) {
         super(true);
         this.controller = NewEntityController.INSTANCE;
         this.directory = directory;
