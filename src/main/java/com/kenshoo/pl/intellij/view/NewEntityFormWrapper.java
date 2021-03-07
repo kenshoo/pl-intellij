@@ -3,6 +3,7 @@ package com.kenshoo.pl.intellij.view;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.psi.PsiDirectory;
 import com.kenshoo.pl.intellij.controller.NewEntityController;
+import com.kenshoo.pl.intellij.controller.NewEntityControllerResolver;
 import com.kenshoo.pl.intellij.model.EntityInput;
 import com.kenshoo.pl.intellij.model.Language;
 import com.kenshoo.pl.intellij.model.PLInputValidator;
@@ -25,16 +26,14 @@ public class NewEntityFormWrapper extends DialogWrapper {
     private final PsiDirectory directory;
     private final NewEntityForm form;
     private final NewEntityController controller;
-    private final Language language;
 
     public NewEntityFormWrapper(@Nullable final PsiDirectory directory,
                                 @NotNull final Language language) {
         super(true);
-        this.controller = NewEntityController.INSTANCE;
+        this.controller = NewEntityControllerResolver.INSTANCE.resolve(language);
         this.directory = directory;
         this.form = new NewEntityForm();
         init();
-        this.language = language;
         setTitle("New PL Entity" + (language == SCALA ? " in Scala" : ""));
     }
 

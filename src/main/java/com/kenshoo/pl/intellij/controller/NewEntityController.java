@@ -4,13 +4,10 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.CaseFormat;
 import com.intellij.psi.PsiDirectory;
 import com.kenshoo.pl.intellij.codegen.*;
-import com.kenshoo.pl.intellij.codegen.java.*;
 import com.kenshoo.pl.intellij.model.EntityInput;
 
 
 public class NewEntityController {
-
-    public final static NewEntityController INSTANCE = new NewEntityController();
 
     private final ClassCreator classCreator;
     private final TableCodeGenerator tableCodeGenerator;
@@ -21,18 +18,7 @@ public class NewEntityController {
     private final UpsertCommandCodeGenerator upsertCommandCodeGenerator;
     private final DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
-    public NewEntityController() {
-        this.classCreator = JavaClassCreator.INSTANCE;
-        this.tableCodeGenerator = JavaTableCodeGenerator.INSTANCE;
-        this.entityCodeGenerator = JavaEntityCodeGenerator.INSTANCE;
-        this.entityPersistenceCodeGenerator = JavaEntityPersistenceCodeGenerator.INSTANCE;
-        this.createCommandCodeGenerator = JavaCreateCommandCodeGenerator.INSTANCE;
-        this.updateCommandCodeGenerator = JavaUpdateCommandCodeGenerator.INSTANCE;
-        this.upsertCommandCodeGenerator = JavaUpsertCommandCodeGenerator.INSTANCE;
-        this.deleteCommandCodeGenerator = JavaDeleteCommandCodeGenerator.INSTANCE;
-    }
-
-    public NewEntityController(
+    private NewEntityController(
             ClassCreator classCreator,
             TableCodeGenerator tableCodeGenerator,
             EntityCodeGenerator entityCodeGenerator,
@@ -93,4 +79,73 @@ public class NewEntityController {
         return String.format("%sPersistence", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, entityName));
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private ClassCreator classCreator;
+        private TableCodeGenerator tableCodeGenerator;
+        private EntityCodeGenerator entityCodeGenerator;
+        private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
+        private CreateCommandCodeGenerator createCommandCodeGenerator;
+        private UpdateCommandCodeGenerator updateCommandCodeGenerator;
+        private UpsertCommandCodeGenerator upsertCommandCodeGenerator;
+        private DeleteCommandCodeGenerator deleteCommandCodeGenerator;
+
+        private Builder() {
+            // singleton
+        }
+
+        public Builder classCreator(ClassCreator classCreator) {
+            this.classCreator = classCreator;
+            return this;
+        }
+
+        public Builder tableCodeGenerator(TableCodeGenerator tableCodeGenerator) {
+            this.tableCodeGenerator = tableCodeGenerator;
+            return this;
+        }
+
+        public Builder entityCodeGenerator(EntityCodeGenerator entityCodeGenerator) {
+            this.entityCodeGenerator = entityCodeGenerator;
+            return this;
+        }
+
+        public Builder entityPersistenceCodeGenerator(EntityPersistenceCodeGenerator entityPersistenceCodeGenerator) {
+            this.entityPersistenceCodeGenerator = entityPersistenceCodeGenerator;
+            return this;
+        }
+
+        public Builder createCommandCodeGenerator(CreateCommandCodeGenerator createCommandCodeGenerator) {
+            this.createCommandCodeGenerator = createCommandCodeGenerator;
+            return this;
+        }
+
+        public Builder updateCommandCodeGenerator(UpdateCommandCodeGenerator updateCommandCodeGenerator) {
+            this.updateCommandCodeGenerator = updateCommandCodeGenerator;
+            return this;
+        }
+
+        public Builder upsertCommandCodeGenerator(UpsertCommandCodeGenerator upsertCommandCodeGenerator) {
+            this.upsertCommandCodeGenerator = upsertCommandCodeGenerator;
+            return this;
+        }
+
+        public Builder deleteCommandCodeGenerator(DeleteCommandCodeGenerator deleteCommandCodeGenerator) {
+            this.deleteCommandCodeGenerator = deleteCommandCodeGenerator;
+            return this;
+        }
+
+        public NewEntityController build() {
+            return new NewEntityController(classCreator,
+                                           tableCodeGenerator,
+                                           entityCodeGenerator,
+                                           entityPersistenceCodeGenerator,
+                                           createCommandCodeGenerator,
+                                           updateCommandCodeGenerator,
+                                           upsertCommandCodeGenerator,
+                                           deleteCommandCodeGenerator);
+        }
+    }
 }
