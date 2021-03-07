@@ -2,7 +2,7 @@ package com.kenshoo.pl.intellij.controller;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.CaseFormat;
-import com.intellij.psi.impl.file.PsiJavaDirectoryImpl;
+import com.intellij.psi.PsiDirectory;
 import com.kenshoo.pl.intellij.codegen.*;
 import com.kenshoo.pl.intellij.model.EntityInput;
 
@@ -51,7 +51,7 @@ public class NewEntityController {
         this.deleteCommandCodeGenerator = deleteCommandCodeGenerator;
     }
 
-    public void createNewEntity(PsiJavaDirectoryImpl directory, EntityInput input) {
+    public void createNewEntity(PsiDirectory directory, EntityInput input) {
         final String tableClassName = createTableClassName(input.getTableName());
         final String entityClassName = createEntityClassName(input.getEntityName());
         final String entityPersistenceClassName = createEntityPersistenceClassName(input.getEntityName());
