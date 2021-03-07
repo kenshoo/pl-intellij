@@ -20,7 +20,7 @@ public class ControllerByLanguageResolver {
 
     private static final NewEntityController JAVA_CONTROLLER =
         NewEntityController.builder()
-                           .classCreator(JavaClassCreator.INSTANCE)
+                           .typeCreator(JavaClassCreator.INSTANCE)
                            .tableCodeGenerator(JavaTableCodeGenerator.INSTANCE)
                            .entityCodeGenerator(JavaEntityCodeGenerator.INSTANCE)
                            .entityPersistenceCodeGenerator(JavaEntityPersistenceCodeGenerator.INSTANCE)
@@ -32,7 +32,7 @@ public class ControllerByLanguageResolver {
 
     private static final NewEntityController SCALA_CONTROLLER =
         NewEntityController.builder()
-                           .classCreator(ScalaClassCreator.INSTANCE)
+                           .typeCreator(ScalaTypeCreator.INSTANCE)
                            .tableCodeGenerator(ScalaTableCodeGenerator.INSTANCE)
                            .entityCodeGenerator(ScalaEntityCodeGenerator.INSTANCE)
                            .entityPersistenceCodeGenerator(ScalaEntityPersistenceCodeGenerator.INSTANCE)
