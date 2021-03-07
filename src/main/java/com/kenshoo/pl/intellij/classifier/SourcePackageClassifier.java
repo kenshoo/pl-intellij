@@ -1,4 +1,4 @@
-package com.kenshoo.pl.intellij.controller;
+package com.kenshoo.pl.intellij.classifier;
 
 import com.intellij.ide.IdeView;
 import com.intellij.ide.actions.JavaCreateTemplateInPackageAction;
@@ -14,9 +14,9 @@ import org.jetbrains.jps.model.java.JavaModuleSourceRootTypes;
 import java.util.Arrays;
 import java.util.Optional;
 
-class SourcePackageClassifier {
+public class SourcePackageClassifier {
 
-    boolean isJava(final DataContext dataContext) {
+    public boolean isJava(final DataContext dataContext) {
         final Optional<ProjectFileIndex> optionalProjectFileIndex = extractProjectFileIndex(dataContext);
         final Optional<PsiDirectory[]> optionalDirs = extractDirs(dataContext);
 

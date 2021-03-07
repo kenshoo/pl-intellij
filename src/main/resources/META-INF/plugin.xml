@@ -31,5 +31,5 @@
         </action>
     </actions>
 
-    <depends>com.intellij.modules.java</depends>
+    <depends optional="true" config-file="com.kenshoo.pl-intellij-plugin-scala.xml">org.intellij.scala</depends>
 </idea-plugin>

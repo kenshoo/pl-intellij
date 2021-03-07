@@ -1,4 +1,4 @@
-package com.kenshoo.pl.intellij.controller;
+package com.kenshoo.pl.intellij.classifier;
 
 import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
