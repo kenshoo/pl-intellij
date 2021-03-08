@@ -1,9 +1,9 @@
 package com.kenshoo.pl.intellij.codegen.java;
 
+import com.kenshoo.pl.intellij.codegen.FieldFlagsCodeGenerator;
 import com.kenshoo.pl.intellij.codegen.TableCodeGenerator;
 import com.kenshoo.pl.intellij.model.EntityInput;
 import com.kenshoo.pl.intellij.model.EntitySchemaField;
-import com.kenshoo.pl.intellij.model.FieldFlags;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +12,9 @@ public class JavaTableCodeGenerator implements TableCodeGenerator {
 
     public static final JavaTableCodeGenerator INSTANCE = new JavaTableCodeGenerator();
 
+    private final FieldFlagsCodeGenerator fieldFlagsGenerator = FieldFlagsCodeGenerator.INSTANCE;
+
     private static final String NEW_LINE = "\n";
-    private static final String EMPTY_STRING = "";
 
     public String generate(String className, EntityInput input) {
         return new StringBuilder()
@@ -68,21 +69,13 @@ public class JavaTableCodeGenerator implements TableCodeGenerator {
                         .append("> ")
                         .append(field.getFieldName())
                         .append(" = ")
-                        .append(functionNameOf(field.getFlags()))
+                        .append(fieldFlagsGenerator.functionNameOf(field.getFlags()))
                         .append("(\"").append(field.getFieldName()).append("\", ")
                         .append("SQLDataType.")
                         .append(field.getType().getSqlType().toUpperCase())
-                        .append(autoInc(field.getFlags()))
+                        .append(fieldFlagsGenerator.autoInc(field.getFlags()))
                         .append(");")
                         .toString())
                 .collect(Collectors.joining(NEW_LINE));
-    }
-
-    private String autoInc(FieldFlags flags) {
-        return flags.isAutoInc() ? ".identity(true)" : EMPTY_STRING;
-    }
-
-    private String functionNameOf(FieldFlags flags) {
-        return flags.isPk() ? "createPKField" : "createField";
     }
 }
