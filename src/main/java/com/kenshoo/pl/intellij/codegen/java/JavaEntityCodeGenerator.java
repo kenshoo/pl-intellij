@@ -1,9 +1,9 @@
 package com.kenshoo.pl.intellij.codegen.java;
 
 import com.kenshoo.pl.intellij.codegen.EntityCodeGenerator;
+import com.kenshoo.pl.intellij.codegen.FieldFlagsCodeGenerator;
 import com.kenshoo.pl.intellij.model.EntityInput;
 import com.kenshoo.pl.intellij.model.EntitySchemaField;
-import com.kenshoo.pl.intellij.model.FieldFlags;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +12,9 @@ public class JavaEntityCodeGenerator implements EntityCodeGenerator {
 
     public static final JavaEntityCodeGenerator INSTANCE = new JavaEntityCodeGenerator();
 
+    private final FieldFlagsCodeGenerator fieldFlagsGenerator = FieldFlagsCodeGenerator.INSTANCE;
+
     private static final String NEW_LINE = "\n";
-    private static final String EMPTY_STRING = "";
 
     public String generate(String entityClassName, String tableClassName, EntityInput input) {
         return new StringBuilder()
@@ -57,7 +58,7 @@ public class JavaEntityCodeGenerator implements EntityCodeGenerator {
     private String createFields(List<EntitySchemaField> fields, String entityClassName, String tableClassName) {
         return fields.stream()
                 .map(field -> new StringBuilder()
-                        .append(immutableAnnotation(field.getFlags()))
+                        .append(fieldFlagsGenerator.immutableAnnotation(field.getFlags()))
                         .append(NEW_LINE)
                         .append("public static final EntityField<")
                         .append(entityClassName)
@@ -71,9 +72,5 @@ public class JavaEntityCodeGenerator implements EntityCodeGenerator {
                         .append(");")
                         .toString())
                 .collect(Collectors.joining(NEW_LINE));
-    }
-
-    private String immutableAnnotation(FieldFlags flags) {
-        return flags.isPk() ? "@Immutable" : EMPTY_STRING;
     }
 }
