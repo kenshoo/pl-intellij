@@ -4,15 +4,18 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.psi.PsiDirectory;
 import com.kenshoo.pl.intellij.controller.NewEntityController;
 import com.kenshoo.pl.intellij.model.EntityInput;
+import com.kenshoo.pl.intellij.model.Language;
 import com.kenshoo.pl.intellij.model.PLInputValidator;
 import com.kenshoo.pl.intellij.model.ValidationError;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.Optional;
 
 import static com.intellij.openapi.ui.Messages.showMessageDialog;
+import static com.kenshoo.pl.intellij.model.Language.SCALA;
 
 
 public class NewEntityFormWrapper extends DialogWrapper {
@@ -22,14 +25,17 @@ public class NewEntityFormWrapper extends DialogWrapper {
     private final PsiDirectory directory;
     private final NewEntityForm form;
     private final NewEntityController controller;
+    private final Language language;
 
-    public NewEntityFormWrapper(@Nullable PsiDirectory directory) {
+    public NewEntityFormWrapper(@Nullable final PsiDirectory directory,
+                                @NotNull final Language language) {
         super(true);
         this.controller = NewEntityController.INSTANCE;
         this.directory = directory;
         this.form = new NewEntityForm();
         init();
-        setTitle("New PL Entity");
+        this.language = language;
+        setTitle("New PL Entity" + (language == SCALA ? " in Scala" : ""));
     }
 
     @Nullable
