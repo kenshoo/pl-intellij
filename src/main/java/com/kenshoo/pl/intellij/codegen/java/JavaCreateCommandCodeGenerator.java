@@ -1,8 +1,8 @@
 package com.kenshoo.pl.intellij.codegen.java;
 
-import com.kenshoo.pl.intellij.codegen.CreateCommandCodeGenerator;
+import com.kenshoo.pl.intellij.codegen.CommandCodeGenerator;
 
-public class JavaCreateCommandCodeGenerator implements CreateCommandCodeGenerator {
+public class JavaCreateCommandCodeGenerator implements CommandCodeGenerator {
 
     public static final JavaCreateCommandCodeGenerator INSTANCE = new JavaCreateCommandCodeGenerator();
 

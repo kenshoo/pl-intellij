@@ -1,9 +1,9 @@
 package com.kenshoo.pl.intellij.codegen.java;
 
 
-import com.kenshoo.pl.intellij.codegen.UpsertCommandCodeGenerator;
+import com.kenshoo.pl.intellij.codegen.CommandCodeGenerator;
 
-public class JavaUpsertCommandCodeGenerator implements UpsertCommandCodeGenerator {
+public class JavaUpsertCommandCodeGenerator implements CommandCodeGenerator {
 
     public static final JavaUpsertCommandCodeGenerator INSTANCE = new JavaUpsertCommandCodeGenerator();
 

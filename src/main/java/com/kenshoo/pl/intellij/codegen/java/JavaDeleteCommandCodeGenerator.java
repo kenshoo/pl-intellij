@@ -1,9 +1,9 @@
 package com.kenshoo.pl.intellij.codegen.java;
 
 
-import com.kenshoo.pl.intellij.codegen.DeleteCommandCodeGenerator;
+import com.kenshoo.pl.intellij.codegen.CommandCodeGenerator;
 
-public class JavaDeleteCommandCodeGenerator implements DeleteCommandCodeGenerator {
+public class JavaDeleteCommandCodeGenerator implements CommandCodeGenerator {
 
     public static final JavaDeleteCommandCodeGenerator INSTANCE = new JavaDeleteCommandCodeGenerator();
 

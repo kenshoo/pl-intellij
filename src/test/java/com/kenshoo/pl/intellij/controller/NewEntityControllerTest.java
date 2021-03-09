@@ -22,16 +22,16 @@ public class NewEntityControllerTest {
     private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
 
     @Mock
-    private CreateCommandCodeGenerator createCommandCodeGenerator;
+    private CommandCodeGenerator createCommandCodeGenerator;
 
     @Mock
-    private UpdateCommandCodeGenerator updateCommandCodeGenerator;
+    private CommandCodeGenerator updateCommandCodeGenerator;
 
     @Mock
-    private UpsertCommandCodeGenerator upsertCommandCodeGenerator;
+    private CommandCodeGenerator upsertCommandCodeGenerator;
 
     @Mock
-    private DeleteCommandCodeGenerator deleteCommandCodeGenerator;
+    private CommandCodeGenerator deleteCommandCodeGenerator;
 
     @Mock
     private SourceCodeFilePersister sourceCodeFilePersister;
