@@ -36,7 +36,17 @@ public class NewEntityControllerTest {
     @Mock
     private ClassCreator classCreator;
 
-    private final NewEntityController underTest = new NewEntityController(classCreator, tableCodeGenerator, entityCodeGenerator, entityPersistenceCodeGenerator, createCommandCodeGenerator, updateCommandCodeGenerator, upsertCommandCodeGenerator, deleteCommandCodeGenerator);
+    private final NewEntityController underTest =
+        NewEntityController.builder()
+                           .classCreator(classCreator)
+                           .tableCodeGenerator(tableCodeGenerator)
+                           .entityCodeGenerator(entityCodeGenerator)
+                           .entityPersistenceCodeGenerator(entityPersistenceCodeGenerator)
+                           .createCommandCodeGenerator(createCommandCodeGenerator)
+                           .updateCommandCodeGenerator(updateCommandCodeGenerator)
+                           .upsertCommandCodeGenerator(upsertCommandCodeGenerator)
+                           .deleteCommandCodeGenerator(deleteCommandCodeGenerator)
+                           .build();
 
     @Test
     public void createTableClassName_convert_tableName_to_className_as_expected() {
