@@ -4,6 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.CaseFormat;
 import com.intellij.psi.PsiDirectory;
 import com.kenshoo.pl.intellij.codegen.*;
+import com.kenshoo.pl.intellij.codegen.java.*;
 import com.kenshoo.pl.intellij.model.EntityInput;
 
 
@@ -21,14 +22,14 @@ public class NewEntityController {
     private final DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     public NewEntityController() {
-        this.classCreator = ClassCreator.INSTANCE;
-        this.tableCodeGenerator = TableCodeGenerator.INSTANCE;
-        this.entityCodeGenerator = EntityCodeGenerator.INSTANCE;
-        this.entityPersistenceCodeGenerator = EntityPersistenceCodeGenerator.INSTANCE;
-        this.createCommandCodeGenerator = CreateCommandCodeGenerator.INSTANCE;
-        this.updateCommandCodeGenerator = UpdateCommandCodeGenerator.INSTANCE;
-        this.upsertCommandCodeGenerator = UpsertCommandCodeGenerator.INSTANCE;
-        this.deleteCommandCodeGenerator = DeleteCommandCodeGenerator.INSTANCE;
+        this.classCreator = JavaClassCreator.INSTANCE;
+        this.tableCodeGenerator = JavaTableCodeGenerator.INSTANCE;
+        this.entityCodeGenerator = JavaEntityCodeGenerator.INSTANCE;
+        this.entityPersistenceCodeGenerator = JavaEntityPersistenceCodeGenerator.INSTANCE;
+        this.createCommandCodeGenerator = JavaCreateCommandCodeGenerator.INSTANCE;
+        this.updateCommandCodeGenerator = JavaUpdateCommandCodeGenerator.INSTANCE;
+        this.upsertCommandCodeGenerator = JavaUpsertCommandCodeGenerator.INSTANCE;
+        this.deleteCommandCodeGenerator = JavaDeleteCommandCodeGenerator.INSTANCE;
     }
 
     public NewEntityController(

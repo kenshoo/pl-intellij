@@ -1,13 +1,13 @@
-package com.kenshoo.pl.intellij.codegen;
+package com.kenshoo.pl.intellij.codegen.java;
 
-public class CommandBuilderMethods {
+public class JavaCommandBuilderMethods {
 
     private static final String NEW_LINE = "\n";
 
     private final String commandClass;
     private final String entityClassName;
 
-    public CommandBuilderMethods(String commandClass, String entityClass) {
+    public JavaCommandBuilderMethods(String commandClass, String entityClass) {
         this.commandClass = commandClass;
         this.entityClassName = entityClass;
     }
