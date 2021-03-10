@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 import static com.kenshoo.pl.intellij.model.Language.JAVA;
 import static com.kenshoo.pl.intellij.model.Language.SCALA;
 
-public class NewEntityControllerResolver {
+public class ControllerByLanguageResolver {
 
-    public static final NewEntityControllerResolver INSTANCE = new NewEntityControllerResolver();
+    public static final ControllerByLanguageResolver INSTANCE = new ControllerByLanguageResolver();
 
     private static final NewEntityController JAVA_CONTROLLER =
         NewEntityController.builder()
