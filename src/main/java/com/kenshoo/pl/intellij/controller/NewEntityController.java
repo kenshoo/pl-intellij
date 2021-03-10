@@ -9,7 +9,7 @@ import com.kenshoo.pl.intellij.model.EntityInput;
 
 public class NewEntityController {
 
-    private final ClassCreator classCreator;
+    private final SourceCodeFilePersister sourceCodeFilePersister;
     private final TableCodeGenerator tableCodeGenerator;
     private final EntityCodeGenerator entityCodeGenerator;
     private final EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
@@ -19,7 +19,7 @@ public class NewEntityController {
     private final DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     private NewEntityController(
-            ClassCreator classCreator,
+            SourceCodeFilePersister sourceCodeFilePersister,
             TableCodeGenerator tableCodeGenerator,
             EntityCodeGenerator entityCodeGenerator,
             EntityPersistenceCodeGenerator entityPersistenceCodeGenerator,
@@ -28,7 +28,7 @@ public class NewEntityController {
             UpsertCommandCodeGenerator upsertCommandCodeGenerator,
             DeleteCommandCodeGenerator deleteCommandCodeGenerator
             ) {
-        this.classCreator = classCreator;
+        this.sourceCodeFilePersister = sourceCodeFilePersister;
         this.tableCodeGenerator = tableCodeGenerator;
         this.entityCodeGenerator = entityCodeGenerator;
         this.entityPersistenceCodeGenerator = entityPersistenceCodeGenerator;
@@ -39,43 +39,43 @@ public class NewEntityController {
     }
 
     public void createNewEntity(PsiDirectory directory, EntityInput input) {
-        final String tableClassName = createTableClassName(input.getTableName());
-        final String entityClassName = createEntityClassName(input.getEntityName());
-        final String entityPersistenceClassName = createEntityPersistenceClassName(input.getEntityName());
-        final String createCommandClassName = "Create" + input.getEntityName();
-        final String updateCommandClassName = "Update" + input.getEntityName();
-        final String upsertCommandClassName = "Upsert" + input.getEntityName();
-        final String deleteCommandClassName = "Delete" + input.getEntityName();
+        final String tableTypeName = createTableTypeName(input.getTableName());
+        final String entityTypeName = createEntityTypeName(input.getEntityName());
+        final String entityPersistenceTypeName = createEntityPersistenceTypeName(input.getEntityName());
+        final String createCommandTypeName = "Create" + input.getEntityName();
+        final String updateCommandTypeName = "Update" + input.getEntityName();
+        final String upsertCommandTypeName = "Upsert" + input.getEntityName();
+        final String deleteCommandTypeName = "Delete" + input.getEntityName();
 
-        final String tableCode = tableCodeGenerator.generate(tableClassName, input);
-        final String entityCode = entityCodeGenerator.generate(entityClassName, tableClassName, input);
-        final String entityPersistenceCode = entityPersistenceCodeGenerator.generate(entityClassName, entityPersistenceClassName);
-        final String createCommandCode = createCommandCodeGenerator.generate(createCommandClassName, entityClassName);
-        final String updateCommandCode = updateCommandCodeGenerator.generate(updateCommandClassName, entityClassName);
-        final String upsertCommandCode = upsertCommandCodeGenerator.generate(upsertCommandClassName, entityClassName);
-        final String deleteCommandCode = deleteCommandCodeGenerator.generate(deleteCommandClassName, entityClassName);
+        final String tableCode = tableCodeGenerator.generate(tableTypeName, input);
+        final String entityCode = entityCodeGenerator.generate(entityTypeName, tableTypeName, input);
+        final String entityPersistenceCode = entityPersistenceCodeGenerator.generate(entityTypeName, entityPersistenceTypeName);
+        final String createCommandCode = createCommandCodeGenerator.generate(createCommandTypeName, entityTypeName);
+        final String updateCommandCode = updateCommandCodeGenerator.generate(updateCommandTypeName, entityTypeName);
+        final String upsertCommandCode = upsertCommandCodeGenerator.generate(upsertCommandTypeName, entityTypeName);
+        final String deleteCommandCode = deleteCommandCodeGenerator.generate(deleteCommandTypeName, entityTypeName);
 
-        classCreator.generateClass(directory, tableClassName, tableCode);
-        classCreator.generateClass(directory, entityClassName, entityCode);
-        classCreator.generateClass(directory, entityPersistenceClassName, entityPersistenceCode);
-        classCreator.generateClass(directory, createCommandClassName, createCommandCode);
-        classCreator.generateClass(directory, updateCommandClassName, updateCommandCode);
-        classCreator.generateClass(directory, upsertCommandClassName, upsertCommandCode);
-        classCreator.generateClass(directory, deleteCommandClassName, deleteCommandCode);
+        sourceCodeFilePersister.persist(directory, tableTypeName, tableCode);
+        sourceCodeFilePersister.persist(directory, entityTypeName, entityCode);
+        sourceCodeFilePersister.persist(directory, entityPersistenceTypeName, entityPersistenceCode);
+        sourceCodeFilePersister.persist(directory, createCommandTypeName, createCommandCode);
+        sourceCodeFilePersister.persist(directory, updateCommandTypeName, updateCommandCode);
+        sourceCodeFilePersister.persist(directory, upsertCommandTypeName, upsertCommandCode);
+        sourceCodeFilePersister.persist(directory, deleteCommandTypeName, deleteCommandCode);
     }
 
     @VisibleForTesting
-    String createTableClassName(String tableName) {
+    String createTableTypeName(String tableName) {
         return String.format("%sTable", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName));
     }
 
     @VisibleForTesting
-    String createEntityClassName(String entityName) {
+    String createEntityTypeName(String entityName) {
         return String.format("%sEntity", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, entityName));
     }
 
     @VisibleForTesting
-    String createEntityPersistenceClassName(String entityName) {
+    String createEntityPersistenceTypeName(String entityName) {
         return String.format("%sPersistence", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, entityName));
     }
 
@@ -84,7 +84,7 @@ public class NewEntityController {
     }
 
     public static class Builder {
-        private ClassCreator classCreator;
+        private SourceCodeFilePersister sourceCodeFilePersister;
         private TableCodeGenerator tableCodeGenerator;
         private EntityCodeGenerator entityCodeGenerator;
         private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
@@ -97,8 +97,8 @@ public class NewEntityController {
             // singleton
         }
 
-        public Builder classCreator(ClassCreator classCreator) {
-            this.classCreator = classCreator;
+        public Builder sourceCodeFilePersister(SourceCodeFilePersister sourceCodeFilePersister) {
+            this.sourceCodeFilePersister = sourceCodeFilePersister;
             return this;
         }
 
@@ -138,7 +138,7 @@ public class NewEntityController {
         }
 
         public NewEntityController build() {
-            return new NewEntityController(classCreator,
+            return new NewEntityController(sourceCodeFilePersister,
                                            tableCodeGenerator,
                                            entityCodeGenerator,
                                            entityPersistenceCodeGenerator,

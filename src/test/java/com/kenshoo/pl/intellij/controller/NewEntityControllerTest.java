@@ -34,11 +34,11 @@ public class NewEntityControllerTest {
     private DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     @Mock
-    private ClassCreator classCreator;
+    private SourceCodeFilePersister sourceCodeFilePersister;
 
     private final NewEntityController underTest =
         NewEntityController.builder()
-                           .classCreator(classCreator)
+                           .sourceCodeFilePersister(sourceCodeFilePersister)
                            .tableCodeGenerator(tableCodeGenerator)
                            .entityCodeGenerator(entityCodeGenerator)
                            .entityPersistenceCodeGenerator(entityPersistenceCodeGenerator)
@@ -49,14 +49,14 @@ public class NewEntityControllerTest {
                            .build();
 
     @Test
-    public void createTableClassName_convert_tableName_to_className_as_expected() {
-        final String className = underTest.createTableClassName("data_base");
-        assertThat(className, is("DataBaseTable"));
+    public void createTableTypeName_convert_tableName_to_typeName_as_expected() {
+        final String typeName = underTest.createTableTypeName("data_base");
+        assertThat(typeName, is("DataBaseTable"));
     }
 
     @Test
-    public void createEntityClassName_convert_entityName_to_className_as_expected() {
-        final String className = underTest.createEntityClassName("abc");
-        assertThat(className, is("AbcEntity"));
+    public void createEntityTypeName_convert_entityName_to_typeName_as_expected() {
+        final String typeName = underTest.createEntityTypeName("abc");
+        assertThat(typeName, is("AbcEntity"));
     }
 }

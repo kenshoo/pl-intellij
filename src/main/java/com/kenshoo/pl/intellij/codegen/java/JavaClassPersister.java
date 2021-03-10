@@ -5,21 +5,21 @@ import com.intellij.ide.fileTemplates.FileTemplateManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaDirectoryService;
 import com.intellij.psi.PsiDirectory;
-import com.kenshoo.pl.intellij.codegen.ClassCreator;
+import com.kenshoo.pl.intellij.codegen.SourceCodeFilePersister;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-public class JavaClassCreator implements ClassCreator {
+public class JavaClassPersister implements SourceCodeFilePersister {
 
-    public static JavaClassCreator INSTANCE = new JavaClassCreator();
+    public static JavaClassPersister INSTANCE = new JavaClassPersister();
 
     private static final String TEMPLATE_NAME = "PL Code Generator (internal)";
     private static final String TEMPLATE_CONTENT = "${CODE}";
 
     @Override
-    public void generateClass(PsiDirectory directory, String className, String code) {
+    public void persist(PsiDirectory directory, String className, String code) {
         final FileTemplate template = getOrCreateTemplate(directory.getProject());
         final Map<String, String> templateParameters = Collections.singletonMap("CODE", code);
         JavaDirectoryService.getInstance().createClass(directory, className, template.getName(), false, templateParameters);
