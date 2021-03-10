@@ -34,11 +34,11 @@ public class NewEntityControllerTest {
     private DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     @Mock
-    private TypeCreator typeCreator;
+    private SourceCodeFilePersister sourceCodeFilePersister;
 
     private final NewEntityController underTest =
         NewEntityController.builder()
-                           .typeCreator(typeCreator)
+                           .sourceCodeFilePersister(sourceCodeFilePersister)
                            .tableCodeGenerator(tableCodeGenerator)
                            .entityCodeGenerator(entityCodeGenerator)
                            .entityPersistenceCodeGenerator(entityPersistenceCodeGenerator)

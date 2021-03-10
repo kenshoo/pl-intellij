@@ -9,7 +9,7 @@ import com.kenshoo.pl.intellij.model.EntityInput;
 
 public class NewEntityController {
 
-    private final TypeCreator typeCreator;
+    private final SourceCodeFilePersister sourceCodeFilePersister;
     private final TableCodeGenerator tableCodeGenerator;
     private final EntityCodeGenerator entityCodeGenerator;
     private final EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
@@ -19,7 +19,7 @@ public class NewEntityController {
     private final DeleteCommandCodeGenerator deleteCommandCodeGenerator;
 
     private NewEntityController(
-            TypeCreator typeCreator,
+            SourceCodeFilePersister sourceCodeFilePersister,
             TableCodeGenerator tableCodeGenerator,
             EntityCodeGenerator entityCodeGenerator,
             EntityPersistenceCodeGenerator entityPersistenceCodeGenerator,
@@ -28,7 +28,7 @@ public class NewEntityController {
             UpsertCommandCodeGenerator upsertCommandCodeGenerator,
             DeleteCommandCodeGenerator deleteCommandCodeGenerator
             ) {
-        this.typeCreator = typeCreator;
+        this.sourceCodeFilePersister = sourceCodeFilePersister;
         this.tableCodeGenerator = tableCodeGenerator;
         this.entityCodeGenerator = entityCodeGenerator;
         this.entityPersistenceCodeGenerator = entityPersistenceCodeGenerator;
@@ -55,13 +55,13 @@ public class NewEntityController {
         final String upsertCommandCode = upsertCommandCodeGenerator.generate(upsertCommandTypeName, entityTypeName);
         final String deleteCommandCode = deleteCommandCodeGenerator.generate(deleteCommandTypeName, entityTypeName);
 
-        typeCreator.generateType(directory, tableTypeName, tableCode);
-        typeCreator.generateType(directory, entityTypeName, entityCode);
-        typeCreator.generateType(directory, entityPersistenceTypeName, entityPersistenceCode);
-        typeCreator.generateType(directory, createCommandTypeName, createCommandCode);
-        typeCreator.generateType(directory, updateCommandTypeName, updateCommandCode);
-        typeCreator.generateType(directory, upsertCommandTypeName, upsertCommandCode);
-        typeCreator.generateType(directory, deleteCommandTypeName, deleteCommandCode);
+        sourceCodeFilePersister.persist(directory, tableTypeName, tableCode);
+        sourceCodeFilePersister.persist(directory, entityTypeName, entityCode);
+        sourceCodeFilePersister.persist(directory, entityPersistenceTypeName, entityPersistenceCode);
+        sourceCodeFilePersister.persist(directory, createCommandTypeName, createCommandCode);
+        sourceCodeFilePersister.persist(directory, updateCommandTypeName, updateCommandCode);
+        sourceCodeFilePersister.persist(directory, upsertCommandTypeName, upsertCommandCode);
+        sourceCodeFilePersister.persist(directory, deleteCommandTypeName, deleteCommandCode);
     }
 
     @VisibleForTesting
@@ -84,7 +84,7 @@ public class NewEntityController {
     }
 
     public static class Builder {
-        private TypeCreator typeCreator;
+        private SourceCodeFilePersister sourceCodeFilePersister;
         private TableCodeGenerator tableCodeGenerator;
         private EntityCodeGenerator entityCodeGenerator;
         private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
@@ -97,8 +97,8 @@ public class NewEntityController {
             // singleton
         }
 
-        public Builder typeCreator(TypeCreator typeCreator) {
-            this.typeCreator = typeCreator;
+        public Builder sourceCodeFilePersister(SourceCodeFilePersister sourceCodeFilePersister) {
+            this.sourceCodeFilePersister = sourceCodeFilePersister;
             return this;
         }
 
@@ -138,7 +138,7 @@ public class NewEntityController {
         }
 
         public NewEntityController build() {
-            return new NewEntityController(typeCreator,
+            return new NewEntityController(sourceCodeFilePersister,
                                            tableCodeGenerator,
                                            entityCodeGenerator,
                                            entityPersistenceCodeGenerator,

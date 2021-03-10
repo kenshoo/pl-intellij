@@ -8,7 +8,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.kenshoo.pl.intellij.codegen.TypeCreator;
+import com.kenshoo.pl.intellij.codegen.SourceCodeFilePersister;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.scala.ScalaFileType;
 import org.jetbrains.plugins.scala.lang.refactoring.util.ScalaNamesUtil;
@@ -19,9 +19,9 @@ import java.util.Properties;
 
 import static com.intellij.openapi.command.WriteCommandAction.writeCommandAction;
 
-public class ScalaTypeCreator implements TypeCreator {
+public class ScalaSourceFilePersister implements SourceCodeFilePersister {
 
-    public static ScalaTypeCreator INSTANCE = new ScalaTypeCreator();
+    public static ScalaSourceFilePersister INSTANCE = new ScalaSourceFilePersister();
 
     private static final String TEMPLATE_NAME = "PL Scala Code Generator (internal)";
     private static final String TEMPLATE_CONTENT =
@@ -29,20 +29,20 @@ public class ScalaTypeCreator implements TypeCreator {
             "${CODE}";
 
     @Override
-    public void generateType(@NotNull PsiDirectory directory,
-                             @NotNull String typeName,
-                             @NotNull String code) {
+    public void persist(@NotNull PsiDirectory directory,
+                        @NotNull String typeName,
+                        @NotNull String code) {
         final Project project = directory.getProject();
-        writeCommandAction(project).run(() -> generateTypeInner(project,
-                                                                directory,
-                                                                typeName,
-                                                                code));
+        writeCommandAction(project).run(() -> persistInner(project,
+                                                           directory,
+                                                           typeName,
+                                                           code));
     }
 
-    private void generateTypeInner(final Project project,
-                                   final PsiDirectory directory,
-                                   final String typeName,
-                                   final String code) {
+    private void persistInner(final Project project,
+                              final PsiDirectory directory,
+                              final String typeName,
+                              final String code) {
         final FileTemplateManager templateManager = FileTemplateManager.getInstance(project);
         final FileTemplate template = getOrCreateTemplate(templateManager);
         final Properties properties = new Properties(FileTemplateManager.getInstance(project).getDefaultProperties());
