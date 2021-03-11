@@ -4,5 +4,5 @@ import com.kenshoo.pl.intellij.model.EntityInput;
 
 public interface EntityCodeGenerator {
 
-    String generate(String entityClassName, String tableClassName, EntityInput input);
+    String generate(String entityTypeName, String tableTypeName, EntityInput input);
 }

@@ -17,4 +17,8 @@ public class FieldFlagsCodeGenerator {
     public String functionNameOf(FieldFlags flags) {
         return flags.isPk() ? "createPKField" : "createField";
     }
+
+    public String immutableAnnotation(FieldFlags flags) {
+        return flags.isPk() ? "@Immutable" : "";
+    }
 }
