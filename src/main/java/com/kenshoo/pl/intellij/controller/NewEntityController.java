@@ -13,20 +13,20 @@ public class NewEntityController {
     private final TableCodeGenerator tableCodeGenerator;
     private final EntityCodeGenerator entityCodeGenerator;
     private final EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
-    private final CreateCommandCodeGenerator createCommandCodeGenerator;
-    private final UpdateCommandCodeGenerator updateCommandCodeGenerator;
-    private final UpsertCommandCodeGenerator upsertCommandCodeGenerator;
-    private final DeleteCommandCodeGenerator deleteCommandCodeGenerator;
+    private final CommandCodeGenerator createCommandCodeGenerator;
+    private final CommandCodeGenerator updateCommandCodeGenerator;
+    private final CommandCodeGenerator upsertCommandCodeGenerator;
+    private final CommandCodeGenerator deleteCommandCodeGenerator;
 
     private NewEntityController(
             SourceCodeFilePersister sourceCodeFilePersister,
             TableCodeGenerator tableCodeGenerator,
             EntityCodeGenerator entityCodeGenerator,
             EntityPersistenceCodeGenerator entityPersistenceCodeGenerator,
-            CreateCommandCodeGenerator createCommandCodeGenerator,
-            UpdateCommandCodeGenerator updateCommandCodeGenerator,
-            UpsertCommandCodeGenerator upsertCommandCodeGenerator,
-            DeleteCommandCodeGenerator deleteCommandCodeGenerator
+            CommandCodeGenerator createCommandCodeGenerator,
+            CommandCodeGenerator updateCommandCodeGenerator,
+            CommandCodeGenerator upsertCommandCodeGenerator,
+            CommandCodeGenerator deleteCommandCodeGenerator
             ) {
         this.sourceCodeFilePersister = sourceCodeFilePersister;
         this.tableCodeGenerator = tableCodeGenerator;
@@ -88,10 +88,10 @@ public class NewEntityController {
         private TableCodeGenerator tableCodeGenerator;
         private EntityCodeGenerator entityCodeGenerator;
         private EntityPersistenceCodeGenerator entityPersistenceCodeGenerator;
-        private CreateCommandCodeGenerator createCommandCodeGenerator;
-        private UpdateCommandCodeGenerator updateCommandCodeGenerator;
-        private UpsertCommandCodeGenerator upsertCommandCodeGenerator;
-        private DeleteCommandCodeGenerator deleteCommandCodeGenerator;
+        private CommandCodeGenerator createCommandCodeGenerator;
+        private CommandCodeGenerator updateCommandCodeGenerator;
+        private CommandCodeGenerator upsertCommandCodeGenerator;
+        private CommandCodeGenerator deleteCommandCodeGenerator;
 
         private Builder() {
             // singleton
@@ -117,22 +117,22 @@ public class NewEntityController {
             return this;
         }
 
-        public Builder createCommandCodeGenerator(CreateCommandCodeGenerator createCommandCodeGenerator) {
+        public Builder createCommandCodeGenerator(CommandCodeGenerator createCommandCodeGenerator) {
             this.createCommandCodeGenerator = createCommandCodeGenerator;
             return this;
         }
 
-        public Builder updateCommandCodeGenerator(UpdateCommandCodeGenerator updateCommandCodeGenerator) {
+        public Builder updateCommandCodeGenerator(CommandCodeGenerator updateCommandCodeGenerator) {
             this.updateCommandCodeGenerator = updateCommandCodeGenerator;
             return this;
         }
 
-        public Builder upsertCommandCodeGenerator(UpsertCommandCodeGenerator upsertCommandCodeGenerator) {
+        public Builder upsertCommandCodeGenerator(CommandCodeGenerator upsertCommandCodeGenerator) {
             this.upsertCommandCodeGenerator = upsertCommandCodeGenerator;
             return this;
         }
 
-        public Builder deleteCommandCodeGenerator(DeleteCommandCodeGenerator deleteCommandCodeGenerator) {
+        public Builder deleteCommandCodeGenerator(CommandCodeGenerator deleteCommandCodeGenerator) {
             this.deleteCommandCodeGenerator = deleteCommandCodeGenerator;
             return this;
         }

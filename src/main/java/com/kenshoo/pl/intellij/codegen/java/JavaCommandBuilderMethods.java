@@ -35,7 +35,7 @@ public class JavaCommandBuilderMethods {
                 .append("}")
                 .append(NEW_LINE)
 
-                // --- with deletion -- //
+                // --- with missing children supplier -- //
 
                 .append(NEW_LINE)
                 .append("public <T>" ).append(commandClass).append(" with(MissingChildrenSupplier<? extends EntityType> missingChildrenSupplier) {")
