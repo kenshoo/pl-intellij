@@ -17,7 +17,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        Nothing changed except for the untilBuild to support the latest IntelliJ version.
+        Fixed menu item visibility to appear in Java packages only.
+        Added support for generating Scala entities in a Scala package.
+        Increased the minimum supported Intellij version to 2020.1.4.
     ]]></change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
