@@ -39,3 +39,11 @@ maven {
 * Using IntelliJ, open the `build.gradle` file as a project.
 
 * Run using Gradle task `runIde`
+
+# How to deploy
+(Sorry, no automatic build for this)
+1. Increase version number in `build.gradle`
+2. Write some release notes in element `<change-notes>` in file `plugin.xml`
+3. Run gradle task `buildPlugin`
+4. Find the ZIP on `./build/distributions/pl-intellij-plugin-0.{version}.zip`
+5. Login to https://plugins.jetbrains.com/plugin/15212-kenshoo-persistence-layer and upload the ZIP
